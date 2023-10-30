@@ -1,0 +1,16 @@
+{
+  "name": "background-removal-application",
+  "version": "1.0.0",
+  "description": "Web-application which can remove the background of an uploaded image",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artemijs Matusevs",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
