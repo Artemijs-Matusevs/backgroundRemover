@@ -9,9 +9,9 @@
 <body>
     <h1> BACKGROUND REMOVER </h1>
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image">
-        <input type="submit" value="upload" />
-    </form>
+    <% if (locals.imgURL) { %>
+        <h1> <%= imgURL %> </h1>
+        <img src="tmp/<%= imgURL %>" alt="Uploaded Image" width="35%">
+    <% } %>
 </body>
 </html>
