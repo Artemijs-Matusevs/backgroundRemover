@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
+import bodyParser from "body-parser";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
@@ -29,14 +30,23 @@ const options = {
   data: encodedParams,
 };
 
+
 //Creating app and setting port
 const app = express();
 const port = 3000;
+
+
 
 //MIDLEWARE
 //Set up folder for the static files
 app.use(express.static("public"));
 app.use(fileUpload());
+app.use(bodyParser.urlencoded( {extended:true} ));
+
+
+
+//Save the path to the image dir in a var
+const imgPath = __dirname + '/public/tmp/';
 
 
 
@@ -48,19 +58,21 @@ app.post("/upload", (req, res) => {
     const image = req.files.image;
     image.mv(__dirname + '/public/tmp/' + image.name);
 
-    //Save the path to the image in a var
-    const imgPath = __dirname + '/public/tmp/' + image.name;
-
+    //Render EJS page passing the saved image name
     res.render("uploaded.ejs", {imgURL: image.name});
 })
 
 
-//Endpoint to handle the API calls
-app.get("/removeBg", async (req, res) => {
+//End point to handle the API calls
+app.post("/test", async (req, res) => {
+    console.log(req.body);
+    const imgURL = __dirname + '/public/tmp/' + req.body.imgURL;
+
+
     //Create new form data object to be sent to Gyazo API
     const form = new FormData();
     form.append('access_token', access_token);
-    form.append('imagedata', fs.createReadStream(imgPath));
+    form.append('imagedata', fs.createReadStream(imgURL));
 
     //Make axios request
     try {
@@ -77,7 +89,10 @@ app.get("/removeBg", async (req, res) => {
 
         try {
             const response = await axios.request(options);
-            console.log(response.data);
+            console.log(response.data)
+
+            res.render('finished.ejs',  {imgURL : response.data.response.image_url} )
+
         } catch (error) {
             console.error(error.message);
         }
@@ -85,7 +100,16 @@ app.get("/removeBg", async (req, res) => {
     } catch (error) {
         console.error(error.message);
     }
-})
+
+
+
+}) 
+
+
+
+
+
+
 
 
 
@@ -94,6 +118,8 @@ app.get("/removeBg", async (req, res) => {
 app.get("/", (req, res) => {
     res.render("page.ejs");
 })
+
+
 
 
 
