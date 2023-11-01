@@ -51,6 +51,7 @@ const imgPath = __dirname + '/public/tmp/';
 
 
 //Handling the post /upload route
+//Post image from the client to server
 app.post("/upload", (req, res) => {
     //console.log(req.files);
 
@@ -63,12 +64,16 @@ app.post("/upload", (req, res) => {
 })
 
 
+
+
+
+
 //End point to handle the API calls
-app.post("/test", async (req, res) => {
+app.post("/removeBg", async (req, res) => {
     console.log(req.body);
     const imgURL = __dirname + '/public/tmp/' + req.body.imgURL;
 
-
+    
     //Create new form data object to be sent to Gyazo API
     const form = new FormData();
     form.append('access_token', access_token);
@@ -82,27 +87,29 @@ app.post("/test", async (req, res) => {
             }
         });
 
+        //Get the Public URL of the uploaded image
         const publicImgUrl = response.data.url;
-        console.log(response.data);
+        //console.log(response.data);
 
+        //Set the image_url encoded url parameter of the config js object
         options.data.set('image_url', publicImgUrl)
 
+
+        //Make an Axios request to the ObjectCut API 
         try {
             const response = await axios.request(options);
             console.log(response.data)
 
+            //Pass the public URL of the image
             res.render('finished.ejs',  {imgURL : response.data.response.image_url} )
 
-        } catch (error) {
+        } catch (error) { //Catch errors from the ObjectCut API call
             console.error(error.message);
         }
 
-    } catch (error) {
+    } catch (error) { //Carch errors from the Gyazo API call
         console.error(error.message);
     }
-
-
-
 }) 
 
 

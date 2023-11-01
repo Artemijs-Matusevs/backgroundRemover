@@ -1,12 +1,124 @@
 *{
     margin: 0;
     padding: 0;
+    background-color: #EEEEEE;
+}
+
+h1 h2{
+    color: #393E46;
 }
 
 h1{
-    color: red;
+    margin-top: 100px;
 }
 
 #imgURL {
     display: none;
 }
+
+
+.body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #EEEEEE;
+}
+
+.otherBody{
+    margin-bottom: 250px;
+}
+
+footer{
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    text-align: end;
+    background-color: rgba(34, 40, 49, 0.9);
+}
+
+.footerText{
+    display: block;
+    margin: 25px;
+    margin-bottom: 0px;
+    margin-top: 7px;
+    color: #00ADB5;
+    font-size: 15px;
+    background-color: transparent;
+}
+
+.footerTextTop{
+    margin-top: 35px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+input{
+    text-align: center;
+}
+
+img{
+    margin: 50px;
+}
+
+
+
+.homeIcon{
+    font-size: 50px;
+    color: #222831;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+}
+
+.homeIcon:hover{
+    color: #00ADB5;
+}
+
+
+
+.fileInput{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.fileButton{
+    font-size: 75px;
+    margin: 20px;
+    color: #222831;
+}
+
+.fileButton:hover{
+    color: #00ADB5;
+    cursor: pointer;
+}
+
+
+
+
+.submitButton{
+    width: 250px;
+    height: 75px;
+    background-color: #222831;
+    color: #EEEEEE;
+    font-size: 22px;
+    border: none;
+}
+
+.submitButton:hover{
+    background-color: #393E46;
+}
+
+
+

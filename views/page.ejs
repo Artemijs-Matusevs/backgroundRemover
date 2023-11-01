@@ -7,11 +7,44 @@
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
-    <h1> BACKGROUND REMOVER </h1>
+    <div class="body">
+        <h1> BACKGROUND REMOVER </h1>
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="image">
-        <input type="submit" value="upload" />
-    </form>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input class="fileInput" id="image" type="file" name="image" required>
+            <div id="fileSelected"></div>
+            <label class="fileButton" for="image"> <ion-icon name="cloud-upload-outline"></ion-icon> </label>
+
+            <input class="submitButton" type="submit" value="upload">
+        </form>
+    </div>
 </body>
+
+
+<footer>
+    <h2 class="footerText footerTextTop"> Copyright 2023 © </h2>
+    <h2 class="footerText"> Developed by Artemijs Matusevs </h2>
+</footer>
+
+<script>
+    //Add a on change event listener to the file input field
+    document.getElementById("image").onchange = function() {
+        getFileSelected(); //Function to add text of the name of the uploaded file
+    }
+
+    function getFileSelected() {
+        //Get the whole path and file name from the input value
+        var file = document.getElementById("image").value;
+
+        const splitFileString = file.split("\\"); // Split the value into an array, split by "\"
+
+        //Get the last element of the array which should be the file name
+        document.getElementById("fileSelected").innerHTML = splitFileString[splitFileString.length - 1];
+    }
+
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 </html>
